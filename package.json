@@ -1,0 +1,14 @@
+{
+  "name": "dsh-rhinitis",
+  "version": "0.1.0",
+  "description": "给 DeepSeek Harness 的一条「慢性鼻炎」副线：按真实时长累积难受、发作时把对话语气拧到不对劲。默认非全局、按会话开关、可随时关掉。",
+  "type": "module",
+  "main": "./src/index.js",
+  "exports": { ".": { "import": "./src/index.js" }, "./package.json": "./package.json" },
+  "files": ["src", "README.md"],
+  "scripts": { "check": "node --check src/index.js" },
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } },
+  "keywords": ["deepseek-harness", "dsh", "dsh-plugin", "rhinitis"],
+  "license": "MIT",
+  "engines": { "node": ">=20.0.0" }
+}
