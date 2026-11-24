@@ -9,6 +9,7 @@ import { homedir } from 'node:os'
 import { join, resolve } from 'node:path'
 
 import { DATA } from './data.js'
+import { attachPanel } from './panel.js'
 
 export const name = DATA.id
 export const inject = []
@@ -541,6 +542,26 @@ export function apply(ctx, configIn) {
       if (rt.enabled) saveRt(rt)
     }
   }
+  // ── 面板（可选增强：没有 webServer 就只是没有面板，不影响身体状态）──────────
+  try {
+    attachPanel(ctx, {
+      DATA,
+      cfg,
+      baseDir,
+      loadRt,
+      saveRt,
+      attach,
+      summary,
+      modeOf,
+      eerinessOf,
+      aggravate,
+      relieveById,
+      normalizeState,
+    })
+  } catch (e) {
+    logger?.warn?.(`[${DATA.id}] 面板挂载失败：${e?.message ?? e}`)
+  }
+
   if (typeof ctx?.effect === 'function') ctx.effect(() => dispose)
 }
 
